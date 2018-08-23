@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Simple DOM example</title>
+	<style>
+		.highlight{
+			color: white;
+			background-color: black;
+			padding: 10px;
+			width: 250px;
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<section>
+        <img src="images/dinosaur.png" alt="A red Tyrannosaurus Rex: A two legged dinosaur standing upright like a human, with small arms, and a large head with lots of sharp teeth.">
+        <p>我是第一个段落 <a href="https://www.mozilla.org/">Mozilla homepage</a></p>
+      </section>
+	  <script>
+	  	//查找节点,创建节点并添加到父节点中。使用JavaScript创建静态内容是毫无意义的 — 最好将其写入HTML，而不使用JavaScript。用JavaScript创建内容也有其他问题（如不能被搜索引擎读取），比HTML复杂得多。
+	  	var link = document.querySelector('a');
+	  	link.textContent='Mozilla Develper Network';
+	  	link.href='https://developer.mozilla.org';
+
+	  	var sect=document.querySelector('section');
+	  	var para=document.createElement('p');
+	  	para.textContent='我是第二个段落';
+	  	sect.appendChild(para);
+	  	var text=document.createTextNode(' — the premier source for web development knowledge.');
+	  	var linkPara=document.querySelector('p');
+	  	linkPara.appendChild(text);
+        // 将第一段p节点移动到父节点的最后一个子节点
+	  	sect.appendChild(linkPara);
+	  	// 删除节点
+	    //sect.removeChild(linkPara);
+	  	//linkPara.parentNode.removeChild(linkPara);
+        
+        // 操作元素样式，HTMLElement.style属性为元素添加内联样式,不推荐
+	    //para.style.color='red';
+        // 操作元素样式，Element.setAttribute()
+	    para.setAttribute('class','highlight');
+	  </script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态的购物单</title>
+	<style>
+		li{
+			margin-bottom: 10px;
+		}
+		li button{
+			font-size: 8px;
+			margin-left: 20px;
+			color: #666;
+		}
+	</style>
+</head>
+<body>
+	<h1>My shopping list</h1>
+	<div>
+		<label for="item">Enter a new item:</label>
+	    <input type="text" id="item" name="item">
+	    <button>Add item</button>
+	</div>
+	<ul>
+		
+	</ul>
+	<script>
+		var ulList=document.querySelector('ul');
+        var btn=document.querySelector('button');
+        var inputSearch=document.querySelector('input');
+        btn.onclick = function(){
+        	var searchVal=inputSearch.value;
+        	inputSearch.value='';
+        	var liItem=document.createElement('li');
+        	var spanItem=document.createElement('span');
+        	var btnItem=document.createElement('button');
+        	liItem.appendChild(spanItem);
+        	liItem.appendChild(btnItem);
+        	spanItem.textContent=searchVal;
+        	btnItem.textContent='Delete';
+        	ulList.appendChild(liItem);
+        	btnItem.onclick = function(e){
+        		ulList.removeChild(e.target.parentNode);
+            }
+        	inputSearch.focus();
+        }
+        
+	</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler property</title>
+    <style>
+      button {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Change color</button>
+    <script type="text">
+      var btn = document.querySelector('button');
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+      function bgChange() {
+        var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      }
+      // 以下内置事件处理器属性的做法不好
+      //btn.onclick =bgChange;
+     /* btn.onmouseout = bgChange;
+      btn.onmouseover = bgChange;
+      btn.onfocus = bgChange;
+      btn.onblur = bgChange;
+      btn.ondblclick = bgChange;
+      window.onkeyup = bgChange;
+      window.onkeydown = bgChange;
+      window.onkeypress = bgChange;*/
+      //用浏览器提供的addEventListener()函数更好
+      btn.addEventListener('click',bgChange);
+       // 移除事件监听器
+      btn.removeEventListener('click',bgChange);
+    </script>
+    <script>
+      var btn = document.querySelector('button');
+      // 随机函数
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+      //给btn添加事件监听器
+      btn.addEventListener('click',function(){
+        var rndCol = 'rgb(' + random(255) +',' + random(255) + ',' +random(255) + ')';
+        document.body.style.backgroundColor = rndCol;
+      });
+    </script>
+  </body>
+</html>

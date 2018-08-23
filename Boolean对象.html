@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Boolean对象</title>
+</head>
+<body>
+	<script>
+		//如果逻辑对象无初始值或者其值为 0、-0、null、""、false、undefined 或者 NaN，那么对象的值为 false。否则，其值为 true .
+		var myBoolean1 = new Boolean();//false
+		var myBoolean2 = new Boolean(0);//false
+		var myBoolean3 = new Boolean(null);//false
+		var myBoolean4 = new Boolean("");//false
+		var myBoolean5 = new Boolean(false);//false
+		var myBoolean6 = new Boolean(NaN);//false
+		var myBoolean7 = new Boolean(-0);
+	</script>
+</body>
+</html>

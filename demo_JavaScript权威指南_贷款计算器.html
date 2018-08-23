@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Loan Caculator</title>
+	<style>
+		
+	</style>
+</head>
+<body>
+	<table>
+		<tr>
+		// 输入贷款数据
+			<th>Enter Loan Data:</th>
+			<td></td>
+			<th>Loan Balance,Camulative Equity,and Interest Payments</th>
+		</tr>
+		<tr>
+		// 输入贷款数额
+			<td>Amount of the loan ($):</td>
+			<td>
+				<input id="amount" onchange="calculate();">
+			</td>
+			<td rowspan="8">
+				<canvas id="graph" width="400" height="250"></canvas>
+			</td>
+		</tr>
+		<tr>
+		// 年利率
+			<td>Annual interest (%):</td>
+			<td>
+				<input id="apr" onchange="calculate();">
+			</td>
+		</tr>
+		<tr>
+		// 每年还款
+			<td>Repayment period (years):</td>
+			<td>
+				<input id="years" onchange="calculate();">
+			</td>
+		</tr>
+		<tr>
+		// 找到贷方
+			<td>Zipcode (to find lenders):</td>
+			<td>
+				<input id="zipcode" onchange="calculate();">
+			</td>
+		</tr>
+		<tr>
+		// 大概偿还
+			<td>Aproximate Payments:</td>
+			<td>
+				<button onclick="calculate();">
+					Caculate
+				</button>
+			</td>
+		</tr>
+		<tr>
+		// 每月偿还
+			<td>Monthly payment:</td>
+			<td>
+				$<span class="output" id="payment"></span>
+			</td>
+		</tr>
+		<tr>
+		// 总的偿还
+			<td>Total payment:</td>
+			<td>
+				$<span class="output" id="total"></span>
+			</td>
+		</tr>
+		<tr>
+		// 总的利润
+			<td>Total interest:</td>
+			<td>
+				$<span class="output" id="totalinterest"></span>
+			</td>
+		</tr>
+		<tr>
+		// 担保者
+			<th>Sponsors:</th>
+			<td colspan="2">
+				Apply for your loan with one of these fine lenders:
+				<div id="lenders"></div>
+			</td>
+		</tr>
+	</table>
+	<script>
+		"use scrict;"
+		//查找文档中用于输入输出的元素
+		function calculate(){
+			var amount=document.getElementById("amount");
+			var apr=document.getElementById("apr");
+			var years=document.getElementById("years");
+			var zipcode=document.getElementById("zipcode");
+			var payment=document.getElementById("payment");
+			var total=document.getElementById("total");
+			var totalinterest=document.getElementById("totalinterest");
+			//假设所有的输入都是合法的，将从input元素中获取输入数据
+			//将百分比格式转换为小数格式，并从年利率转换为月利率
+			//将年度赔付转换为月度赔付
+			var principal=parseFloat(amount.value);//返回字符串中的数字,principal是本金
+			var interest=parseFloat(apr.value);
+			var payments=parseFloat(years.value);
+			//现在计算月度赔付的数据
+			var x=Math.pow(1+interest,payments);//Math.pow(x,y)求x 的 y 次幂。
+			var monthly=(principal * x * interest) / (x-1);
+			// 如果结果没有超出Javascript能表示的数字范围，且用户的输入也正确
+			// 下面展示的结果就是合法的
+			if(isFinite(monthly)){
+				// 将数据填充到输出字段的位置，四舍五入到小数点后两位数字
+				payment.innerHTML=monthly.toFixed(2);
+				//NumberObject.toFixed(num),num必需,规定小数的位数，是0-20之间的值，包括0和20。
+				//如果省略了该参数，将用0代替。返回 NumberObject 的字符串表示
+				total.innerHTML=(monthly* payments).toFixed(2);
+				// 将用户的输入数据保存下来，这样在下次访问时也能取到数据
+				save(amount.value,apr.value,years.value,zipcode.value);
+				// 找到并展示本地放贷人，但忽略网络错误
+				try{
+					//捕获这段代码抛出的所有异常
+					getLenders(amount.value,apr.value,years.value,zipcode.value);
+				}
+				catch(e){
+					// 忽略这些异常
+				}
+				// 最后，用图表展示贷款余额，利息和资产收益
+				chart(principal,interest,monthly,payments);
+		    }
+		    else{
+		    	// 计算结果不是数字或者是无穷大，意味着输入数据是非法或不完整的
+		    	// 清空之前的输入数据
+		    	payment.innerHTML="";
+		    	total.innerHTML="";
+		    	totalinterest.innerHTML="";
+		    	chart();//不传参数就是清空图表
+		    }
+		}
+		//将用户的输入保存到localStorage对象的属性中
+		// 这些属性再次访问时还会继续保持在原来的位置
+		function save(amount,apr,years,zipcode){
+			if(widow.localStorage){
+				localStorage.loan_amout=amount;
+				localStorage.apr=apr;
+				localStorage.years=years;
+				localStorage.loan_zipcode=zipcode;
+			}
+		}
+		// 在文档首次加载时，将会尝试还原输入字段
+		widow.onload=function(){
+			if(window.localStorage && localStorage.loan_amout){
+				document.getElementById("amount").value=localStorage.loan_amout;
+				document.getElementById("apr").value=localStorage.loan_apr;
+				document.getElementById("years").value=localStorage.loan_years;
+				document.getElementById("zipcode").value=localStorage.loan_zipcode;
+			}
+		}
+
+		function getLenders(amount,apr,years,zipcode){
+			// ru
+			if(window.XMLHttpRequest)
+				return;
+
+			// 
+		}
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>复杂的闭包实例</title>
+</head>
+<body>
+	<script>
+		// doAdd() 函数根本不接受参数，它使用的值是从执行环境中获取的。使用闭包要小心，因为它们可能会变得非常复杂。
+		var iBaseNum = 10;
+
+        function addNum(iNum1, iNum2) {
+            function doAdd() {
+                return iNum1 + iNum2 + iBaseNum;
+            }
+            return doAdd();
+        }
+	</script>
+</body>
+</html>

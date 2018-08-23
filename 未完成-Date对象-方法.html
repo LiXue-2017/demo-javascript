@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Date对象</title>
+</head>
+<body>
+	<script>
+		var date=new Date();
+		document.write(date + '<br>');
+		
+		var dateS=date.getTime();
+		document.write('毫秒：'+dateS + '<br>');
+        
+        var y=date.getFullYear();
+		document.write('年：'+y + '<br>');
+
+        var m1=date.getMonth();
+		document.write('月：'+m1 + '<br>');
+		
+		var day=date.getDate();
+		document.write('几号：'+day + '<br>');
+
+        var week=date.getDay();
+		document.write('星期几：'+week + '<br>');
+
+		var h=date.getHours();        
+		document.write('时：'+h + '<br>');
+
+        var m2=date.getMinutes();        
+		document.write('分：'+ m2 + '<br>');
+
+		var s=date.getSeconds();        
+		document.write('秒：'+ s + '<br>');
+
+		
+
+		var year=date.getFullYear();
+		document.write(''+year + '<br>');
+	</script>
+</body>
+</html>

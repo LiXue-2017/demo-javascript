@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承的方式-对象冒充</title>
+</head>
+<body>
+	<script>
+		function ClassA(sColor){
+			this.color = sColor;
+			this.sayColor = function () {
+				console.log(this.color);
+			};
+		}
+		function classB(sColor,sName){
+            this.newMethod = ClassA;
+            this.newMethod(sColor);
+           
+            delete this.newMethod;//删除了对 ClassA 的引用，这样以后就不能再调用它。
+            /*
+            this.sayColor = function(){
+            	console.log("我会覆盖继承的sayColor方法");
+            }*/
+            this.name = sName;
+            this.sayName = function (){
+            	console.log(this.name);
+            }
+		} 
+		var objA = new ClassA("red");
+		objA.sayColor();
+
+		var objB = new classB("blue","Lucy");
+		objB.sayColor();
+		objB.sayName();
+		
+	</script>
+</body>
+</html>

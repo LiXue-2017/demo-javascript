@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Array对象的方法</title>
+</head>
+<body>
+	
+	<script>
+		var arr1=new Array(1,2,3,4,5,6,7);
+		var arr2=new Array('1,2,3,4,5,6,7');
+		// concat()连接多个数组或向现有数组添加新元素，并返回结果。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。
+        var arrConcat = arr1.concat(arr1,arr2);
+        arr1 = arr1.concat('我是连接字符串');
+        // join() 将数组中所有元素通过指定的分隔符连接成字符串，不指定参数默认使用逗号作为分隔符
+        var arrJoin = arr1.join('+');
+        // pop() 删除并返回数组的最后一个元素,把数组长度减 1，并且返回它删除的元素的值。
+        // 如果数组已经为空，则 pop() 不改变数组，并返回 undefined 值。
+        //该方法会改变原来的数组，而不会创建新的数组。
+        var arrPop = arr1.pop();//[1,2,3,4,5,6,7]
+        var arr3 = [];
+        var arrPop1 = arr3.pop();//undefined
+
+        // 向数组的末尾添加一个或多个元素，并返回数组添加后的新长度。
+        // 该方法会改变原来的数组，而不会创建新的数组。
+        var arrPush = arr1.push('我是push进来的字符串');//8
+        // reverse() 颠倒数组中元素的顺序,
+        //该方法会改变原来的数组，而不会创建新的数组。
+        arr1.reverse();
+
+        //shift()删除并返回数组的第一个元素
+        //如果数组是空的，那么 shift() 方法将不进行任何操作，返回 undefined 值。
+        //该方法会改变原来的数组，而不会创建新的数组。
+        var arr4 = new Array('我是被删除的数组中的首个元素',2,3);
+        var arrShift = arr4.shift();
+        //unshift() 可向数组的开头添加一个或更多元素，并返回新的长度
+        var arrunShift = arr4.unshift('我是向数组开头添加的首个元素','我是向数组开头添加的第二个元素');
+        
+        // .slice(start,end)从某个已有的数组返回选定的元素.不会修改数组.
+        var arrSlice = arr1.slice(3,-1);
+        var arrtoString = arrSlice.toString();
+        
+        // 以下是将对象转换为二维数组
+        var scoreObject = {
+            "Tony": {
+                "Math": 95,
+                "English": 79,
+                "Music": 68
+            }, 
+            "Simon": {
+                "Math": 100,
+                "English": 95,
+                "Music": 98
+            }, 
+            "Annie": {
+                "Math": 54,
+                "English": 65,
+                "Music": 88
+            }
+        }
+        var scoreArray=[],
+            arrItem=[];
+        for (var i in scoreObject) {
+        	arrItem.push(i);
+        	for (var j in scoreObject[i]) {
+        		arrItem.push(scoreObject[i][j]);
+        	}
+        	scoreArray.push(arrItem);
+        	arrItem=[];
+        }
+        console.log(scoreArray);
+        
+        // 数组转为对象
+        var menuArr = [
+            [1, "Area1", -1],
+            [2, "Area2", -1],
+            [3, "Area1-1", 1],
+            [4, "Area1-2", 1],
+            [5, "Area2-1", 2],
+            [6, "Area2-2", 2],
+            [7, "Area1-2-3", 4],
+            [8, "Area2-2-1", 6],
+        ];
+        // 未完成
+        var objItem={},menuObj={};
+         for (var o in menuArr) {
+         	if(menuArr[o][2]===-1){
+         		objItem.name=menuArr[o][1];
+         		objItem.subMenu={};
+         	}
+         	for (var i = 0; i < menuArr.length; i++) {
+         		if(i===o){
+         			continue;
+         		}
+
+         		if(menuArr[o][0]===menuArr[i][2]){
+         			menuArr[o].//未完成
+         		}
+         	}
+        
+        }
+   	</script>
+</body>
+</html>

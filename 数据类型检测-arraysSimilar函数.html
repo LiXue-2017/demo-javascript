@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript类型检测-函数-判断传入的两个数组是否相似</title>
+	<style>
+		img{width: 600px;
+		    height: 500px;}
+	</style>
+</head>
+<body>
+     <script src="js/jquery-3.2.1.min.js"></script>
+	<script>
+		TYPES=['string','boolean','number','undefined','null','function','date','window'];
+		TYPE=['string','number','undefined','boolean','null','date','function','window'];
+    console.log($.type(undefined));
+    console.log($.type(null));
+    console.log($.type(undefined));
+    console.log($.type(undefined));
+
+       /* function arraysSimilar(arr1, arr2){
+        	var count1=[],
+        	    count2=[];
+            if(!arr1 instanceof Array||!arr2 instanceof Array){
+                return false;
+            }
+            if(arr1.length!==arr2.length){
+                return false;
+            }
+            if(!getType(arr1) || !getType(arr2)){
+            	return false;
+            }
+            count1=getType(arr1).sort();
+            count2=getType(arr2).sort();
+            for (var i = 0; i < arr1.length; i++) {
+            	if(count1[i]===count2[i]){
+            		
+            	}
+            	return false;
+            }
+        }
+        function getType(arr){
+        	var count=[],oType;
+        	for (var i = 0; i < arr.length; i++) {
+            	for(var x in TYPES){
+            		if(typeof(arr[i])==="object"){
+            			oType=Object.prototype.toString.call(arr[i]).toLowerCase().slice(8,-1);
+            			if(oType===TYPES[x]){
+                    	count.push(oType);
+                    	console.log("toString");
+                        }
+            		}
+            		if(typeof(arr[i])!=="object" && typeof(arr[i])===TYPES[x]){
+            			count.push(typeof(arr[i]));
+            			console.log(TYPES[x]);
+            		}
+                }
+            }
+            return count;
+        }*/
+       
+        // 判断传入的两个数组是否相似，具体需求：
+        // 1. 数组中的成员类型相同，顺序可以不同。例如[1, true] 与 [false, 2]是相似的。
+        // 2. 数组的长度一致
+        // 3. 类型的判断范围，需要区分:String, Boolean, Number, undefined, null, 函数，日期, window.
+        function arraySimilar(arr1,arr2){
+        	// Array.isArray() 用于确定传递的值是否是一个 Array，但IE 678不支持该方法
+        	if(!arr1 instanceof Array||!arr2 instanceof Array || arr1.length!=arr2.length){
+        		return false;
+        	}
+        	var arrType1=[],arrType2=[];
+        	for (var i in arr1){
+        		arrType1.push(type(arr1[i]));
+        		arrType2.push(type(arr2[i]));
+        	}
+        	// Array对象覆盖了Object的 toString 方法。对于数组对象，toString 方法连接数组并返回一个字符串，其中包含用逗号分隔的每个数组元素。
+        	if(arrType1.sort().toString()==arrType2.sort().toString()){
+        		return true;
+        	}else{
+        		return false;
+        	}
+        }
+         function type(el){
+    	    return el === null ? "[object Null]" : Object.prototype.toString.call(el);//hack IE678
+        }
+
+
+        var aaa=["100","30",false,undefined,null];
+        var bbb=[true,"80","ddd",null,undefined];
+        var c=arraySimilar(aaa,bbb);
+        console.log(c);
+	</script>
+
+
+</body>
+</html>

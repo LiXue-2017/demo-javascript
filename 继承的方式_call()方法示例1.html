@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承的方式-call()方法</title>
+</head>
+<body>
+	<script type="text/javascript">
+		function ClassA(sColor) {
+            this.color = sColor;
+            this.sayColor = function () {
+                console.log(this.color);
+            };
+        }
+
+        function ClassB(sColor, sName) {
+            //this.newMethod = ClassA;
+            //this.newMethod(color);
+            //delete this.newMethod;
+            ClassA.call(this, sColor);//将this代表的ClassB的实例传递给ClassA引用的函数。函数 ClassA() 在对象外定义
+            this.name = sName;
+            this.sayName = function () {
+                console.log(this.name);
+            };
+        }
+
+        var objA = new ClassA("blue");
+        var objB = new ClassB("red", "John");
+        objA.sayColor();
+        objB.sayColor();
+        objB.sayName();
+
+        function Product(name,price){
+			this.name = name;
+			this.price = price;
+		}
+		function Food(name,price){
+			Product.call(this,name,price);
+			this.category = "food";
+		}
+		console.log(new Food("cheese",5).name);
+    </script>
+</body>
+</html>

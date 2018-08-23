@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeout和setInterval</title>
+</head>
+<body>
+	<input type="button" value="Start count!" onClick="timeCount()">
+    <input type="text" id="txt">
+    <input type="button" value="Stop count!" onClick="stopCount()">
+	
+	<div id="clock"></div>
+	<script>
+		var c=0,t;
+		function timeCount(){
+			document.getElementById('txt').value=c;
+			c+=1;
+			//t=setTimeout(timeCount,1000);
+			// 或
+			t=setTimeout('timeCount()',1000);
+		}
+
+		function stopCount(){
+			clearTimeout(t);
+		}
+
+		// 计时时钟
+		function startTime(){
+			var today=new Date();
+			var h=today.getHours();
+			var m=today.getMinutes();
+			var s=today.getSeconds();
+			h=checkTime(h);
+			m=checkTime(m);
+			s=checkTime(s);
+			document.getElementById('clock').innerHTML=h+':'+m+':'+s;
+			t=setTimeout('startTime()',1000);
+		}
+		function checkTime(i){
+			if(i<10){
+				i='0'+i;
+			}
+			return i;
+
+		}	
+		window.onload=function(){
+			startTime();
+		}
+	</script>
+</body>
+</html>

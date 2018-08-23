@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Random color example — event handler property</title>
+    <style>
+      button {
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Change color</button>
+
+    <script>
+      var btn = document.querySelector('button');
+      // 随机函数
+      function random(number) {
+        return Math.floor(Math.random()*number);
+      }
+      /*事件对象 e 的target属性始终是事件刚刚发生的元素的引用。
+      当您要在多个元素上设置相同的事件处理程序时，e.target非常有用，并且在发生事件时对所有元素执行某些操作。e.target总是能准确选择当前操作的东西。 */
+      function bgChange(e){
+         var rndCol = 'rgb(' + random(255) + ',' + random(255) + ',' + random(255) + ')';
+         e.target.style.backgroundColor = rndCol;
+         console.log(e);
+      }
+      btn.addEventListener('click',bgChange);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>继承的方式_使用call方法调用父构造函数</title>
+</head>
+<body>
+	<script>
+		function Product(name,price){
+			this.name = name;
+			this.price = price;
+			if(price < 0){
+				throw RangeError("Cannot create product " + this.name + "with a negative price");
+			}
+		}
+        // 继承Product的属性和方法
+		function Food(name,price){
+			Product.call(this,name,price);
+			this.category = "food";
+		}
+		//等同于
+		function Food(name,price){
+			this.name = name;
+			this.price = price;
+			if(price<0){
+				throw RangeError("Cannot create product " + this.name + " with a negative price")
+			}
+            this.category = "food";
+		}
+		// 继承Product的属性和方法
+		function Toy(name,price){
+			Product.call(this,name,price);
+			this.category="toy";
+		}
+		var cheese = new Food("feta",5);
+		var fun = new Toy("ROBOT",40);
+		
+	</script>
+</body>
+</html>

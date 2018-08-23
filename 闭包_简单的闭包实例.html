@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>简单的闭包实例</title>
+</head>
+<body>
+	<script>
+		// 脚本被载入内存后，并没有为函数 sayHelloWorld() 计算变量 sMessage 的值。该函数捕获 sMessage 的值只是为了以后的使用，也就是说，解释程序知道在调用该函数时要检查 sMessage 的值。sMessage 将在函数调用 sayHelloWorld() 时（最后一行）被赋值，显示消息 "hello world"。
+		var sMessage = "ehllo world";
+
+		function sayHelloWorld(){
+			alert(sMessage);
+		}
+
+		sayHelloWorld();
+	</script>
+</body>
+</html>

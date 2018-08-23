@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Function start</title>
+    <style>
+      .msgBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 220px;
+        background: #eee;
+      }
+      .msgBox p {
+        line-height: 1.5;
+        padding: 10px 20px;
+        color: #333;
+        padding-left: 82px;
+        background-position: 25px center;
+        background-repeat: no-repeat; 
+      }
+      .msgBox button {
+        background: none;
+        border: none;
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 1.1rem;
+        color: #aaa;
+      }
+    </style>
+  </head>
+  <body>
+    <button>Display message box</button>
+
+    <script>
+    	var btn=document.querySelector('button');
+    	// 调用函数时不加括号，表示只有点击事件发生时才调用，否则不调用。函数名后面的这个括号叫做“函数调用运算符”。只有在想直接调用函数的地方才加括号。匿名函数里面的代码也不是直接运行的, 只要代码在函数体内。
+        btn.onclick=function(){
+        	displayMessage('Woo, this is a different message!','chat');
+        
+      function displayMessage(msgText,msgType){
+      	var html=document.querySelector('html');
+      	// 创建消息框容器div，添加到HTML中
+      	var panel=document.createElement('div');
+      	panel.setAttribute('class','msgBox');
+      	html.appendChild(panel);
+        // 创建p元素，将消息内容添加到p中
+      	var msg=document.createElement('p');
+      	msg.textContent=msgText;
+      	panel.appendChild(msg);
+        // 创建关闭按钮
+      	var closeBtn = document.createElement('button');
+      	closeBtn.textContent='x';
+      	panel.appendChild(closeBtn);
+      	// 点击关闭按钮
+        closeBtn.onclick=function(){
+      		panel.parentNode.removeChild(panel);
+        }
+        // msgType类型
+        if(msgType==='warning'){
+        	msg.style.backgroundImage='url(icons/warning.png)';
+        	panel.style.backgroundColor='red';
+        }
+        else if(msgType==='chat'){
+        	msg.style.backgroundImage='url(icons/chat.png)';
+        	panel.style.backgroundColor='aqua';
+        }
+        else{
+        	msg.style.paddingLeft='20px';
+        }
+      	}
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+
+  </body>
+    <script>
+        //1在person1变量中存储了一个空对象,然后向此对象添加属性和方法
+        var person1 = new Object();
+        person1.name = 'Chris';
+        person1['age'] = 38;
+        person1.greeting = function(){
+            alert('Hi! I\'m ' + this.name + '.');
+        }
+        // 2.将对象文本传递给Object() 构造函数作为参数， 以便用属性/方法填充它
+        var person2 = new Object({
+            name : 'Chris',
+            age : 38,
+            greeting : function(){
+                alert('Hi! I\'m ' + this.name + '.');
+            }
+        });
+
+    </script>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>一个简单的时钟</title>
+</head>
+<body>
+	<div id="clock"></div>
+	<div id="clock2"></div>
+	<script>
+
+        function getYear(date){
+        	return date.getFullYear();
+        }
+        function getMonth(date){
+        	return date.getMonth();
+        }
+        function getDay(date){
+        	return checkTime(date.getDate());
+        }
+
+        function getWeekDay(date){
+			return date.getDay(); 
+		}
+        
+        function getHours(date){
+        	return checkTime(date.getHours());
+        }
+        function getMinutes(date){
+        	return checkTime(date.getMinutes());
+        }
+        function getSeconds(date){
+			return checkTime(date.getSeconds());
+		}
+		function checkTime(n){
+			return n<10 ? '0' + n : n;
+		}
+        function formatDate(y,m1,d,w,h,m2,s){
+        	switch(w){
+		    	case 1: w = '星期一';break;
+		    	case 2: w = '星期二';break;
+		    	case 3: w = '星期三';break;
+		    	case 4: w = '星期四';break;
+		    	case 5: w = '星期五';break;
+		    	case 6: w = '星期六';break;
+		    	default:w = '星期日';
+		    }
+        	return y+'年 '+m1+'月 '+d+'日 '+w+' '+h+':'+m2+':'+s;
+        }
+        function formatDate2(y,m1,d,w,h,m2,s){
+        	switch(w){
+		    	case 1: w = 'Monday';break;
+		    	case 2: w = 'Tuesday';break;
+		    	case 3: w = 'Wednesday';break;
+		    	case 4: w = 'Thursday';break;
+		    	case 5: w = 'Friday';break;
+		    	case 6: w = 'Saturday';break;
+		    	default:w = 'Sunday';
+		    }
+		    var amOrPm=h>12? 'PM' : 'AM';
+        	return y + '-' + m1 + '-' + d + ' '+ w + ' ' + h +':'+m2+':'+s+' '+ amOrPm;
+        }
+        function getDate(){
+        	var date=new Date();
+        	var y=getYear(date);
+        	var m1=getMonth(date);
+        	var d=getDay(date);
+        	var w=getWeekDay(date);
+        	var h=getHours(date);
+        	var m2=getMinutes(date);
+        	var s=getSeconds(date);
+        	document.getElementById('clock').innerHTML=formatDate(y,m1,d,w,h,m2,s);
+            document.getElementById('clock2').innerHTML=formatDate2(y,m1,d,w,h,m2,s);
+        	var t=setTimeout('getDate()',1000);
+        }
+        window.onload=function(){
+		    getDate();
+        }
+	</script>
+</body>
+</html>

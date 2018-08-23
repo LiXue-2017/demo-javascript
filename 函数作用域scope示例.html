@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Function scope example</title>
+</head>
+<body>
+  <script type="text">
+    var x = 1;
+    function a() {
+      var y = 2;
+    }
+    function b() {
+      var z = 3;
+    }
+    function output(value) {
+      var para = document.createElement('p');
+      document.body.appendChild(para);
+      para.textContent = 'Value: ' + value;
+    }
+    // 在全局范围可访问全局变量x
+    output(x);
+    // 无法访问函数中的局部变量y,z
+     output(y);
+     output(z);
+  </script>
+  <script type="text">
+  	var x = 1;
+    function a() {
+      var y = 2;
+      output(y);
+    }
+    function b() {
+      var z = 3;
+      output(z);
+    }
+    function output(value) {
+      var para = document.createElement('p');
+      document.body.appendChild(para);
+      para.textContent = 'Value: ' + value;
+    }
+    a();
+    b();
+  </script>
+  <script type="text">
+  	var x = 1;
+    function a() {
+      var y = 2;
+      output(x);
+    }
+    function b() {
+      var z = 3;
+      output(x);
+    }
+    function output(value) {
+      var para = document.createElement('p');
+      document.body.appendChild(para);
+      para.textContent = 'Value: ' + value;
+    }
+    a();
+    b();
+  </script>
+<script type="text/javascript">
+  	var x = 1;
+    function a() {
+      var y = 2;
+      // 出错，不能访问到z变量
+      output(z);
+    }
+    function b() {
+      var z = 3;
+      output(y);
+    }
+    function output(value) {
+      var para = document.createElement('p');
+      document.body.appendChild(para);
+      para.textContent = 'Value: ' + value;
+    }
+    a();
+    b();
+  </script>
+</body>
+</html>

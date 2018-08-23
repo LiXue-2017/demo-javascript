@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Object-oriented JavaScript example</title>
+  </head>
+
+  <body>
+    <p>This example requires you to enter commands in your browser's JavaScript console (see <a href="https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_are_browser_developer_tools">What are browser developer tools</a> for more information).</p>
+
+  </body>
+    <script>
+    	//不推荐
+    	function createNewPerson(name){
+    		var obj={};
+    		obj.name=name;
+    		obj.greeting=function(){
+    			alert('Hi! I\'m '+this.name +'.');
+    		}
+    		return obj;
+    	}
+    	var salva=createNewPerson('salva');
+    	salva.name;
+        salva.greeting();
+        // JavaScript 版本的构建函数（用于创建对象实例），一个构建函数通常是大写字母开头
+        function Person(name){
+        	this.name=name;
+        	this.greeting=function(){
+        		alert('Hi! I\'m '+this.name +'.');
+        	}
+        }
+        // 调用构建函数创建新的实例，并把结果保存到变量中。
+        var person1=new Person('Bob');
+        var person2 = new Person('Sarah');
+    </script>
+</html>
